@@ -1,7 +1,11 @@
 #include <Arduino.h>
+#include "Conexion.h"
+
+Conexion con;
 
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(115200);
+  con.ConnectWiFi_STA();
 }
 
 void loop() {
