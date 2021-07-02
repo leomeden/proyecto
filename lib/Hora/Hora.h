@@ -7,8 +7,7 @@
 class Hora  {  
     private:
         // Parametros 
-        
-  
+          
     public:
         void Iniciar_Hora();
         void Actualizar_Hora();
@@ -16,12 +15,5 @@ class Hora  {
         long Traer_Hora_Unix();
                    
 };
-
-
-
-
-
-
-
 
 #endif // __HORA_H__

@@ -2,7 +2,7 @@
 
 WiFiUDP ntpUDP;
 
-long utcOffsetInSeconds = -10800;
+long utcOffsetInSeconds = 0;//-10800; //este offset para uso horario GMT +3 de Argentina
 long updateInterval = 60*60*1000;
 
 NTPClient timeClient(ntpUDP,"pool.ntp.org", utcOffsetInSeconds, updateInterval);
