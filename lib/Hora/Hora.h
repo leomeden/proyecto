@@ -1,6 +1,7 @@
 #ifndef __HORA_H__
 #define __HORA_H__
 
+#include <Arduino.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
