@@ -3,11 +3,13 @@
 
 #include "Conexion.h"
 #include "Hora.h"
+#include "Api.h"
 
 Ticker interrupt_1;
 
 Conexion con;
 Hora tiempo;
+Api api;
 String hora;
 long unixTime;
 volatile boolean bandera = false;
@@ -35,6 +37,9 @@ void loop() {
     randNumber2 = random(3, 8); //aca poner la funcion de lectura de corriente
     bandera = false;
     unixTime = tiempo.Traer_Hora_Unix();
+
+    api.Create(randNumber1, hora , unixTime);
+
     Serial.print("Hora: ");
     Serial.print(hora);
     Serial.print(" / ");
