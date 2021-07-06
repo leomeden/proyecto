@@ -15,7 +15,7 @@ void Api::processResponse(int httpCode, HTTPClient& http, String message, String
     Serial.println("");
     Serial.printf("Request failed, error: %i\n", httpCode);
 
-   // Guardar_FS(message, dayStamp);
+    Fs.Guardar_FS(message, dayStamp);
   }
   http.end();
 }
@@ -58,7 +58,7 @@ void Api::Create(int valor, String hora, long unixTime)
 
 /*void Api::Reenvio(String message, String dayStamp)
 {
-  HTTPClient http;
+  //HTTPClient http;
   http.setTimeout(500);
   http.begin(ApiHost + "/api/sensor");
   http.addHeader("Content-Type", "application/json");
@@ -73,8 +73,8 @@ void Api::Create(int valor, String hora, long unixTime)
 
   processResponse(httpCode, http, message, dayStamp);
  
-  int splitT = hora.indexOf("T");
-  String dayStamp = hora.substring(0, splitT);
-  processResponse(httpCode, http, message, dayStamp);
+  //int splitT = hora.indexOf("T");
+  //String dayStamp = hora.substring(0, splitT);
+  //processResponse(httpCode, http, message, dayStamp);
   
 }*/

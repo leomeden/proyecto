@@ -4,12 +4,14 @@
 #include "Conexion.h"
 #include "Hora.h"
 #include "Api.h"
+#include "FileSystem.h"
 
 Ticker interrupt_1;
 
 Conexion con;
 Hora tiempo;
 Api api;
+FileSystem Fs;
 String hora;
 long unixTime;
 volatile boolean bandera = false;
@@ -24,6 +26,10 @@ void setup() {
   con.ConnectWiFi_STA(); //conecta wifi en modo Station
   tiempo.Iniciar_Hora();
   tiempo.Actualizar_Hora();
+  //Comentar esta línea despues de la primera vez ya que formatea el SPIFFS
+  Fs.Format_FS();
+  
+  Fs.Abrir_FS();
 
   interrupt_1.attach(10, funcInterr);
 }

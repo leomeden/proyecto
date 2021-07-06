@@ -5,12 +5,14 @@
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
 #include <ArduinoJson.h>
+#include "FileSystem.h"
 
 class Api  {  
     private:
 
         WiFiClient client;
         HTTPClient http;
+        FileSystem Fs;
         
         String ApiHost = "http://192.168.1.8:3000";
         //String ApiHost = "http://raspberrypi.local:3000";
