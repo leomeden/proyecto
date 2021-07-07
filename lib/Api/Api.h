@@ -13,6 +13,7 @@ class Api  {
         WiFiClient client;
         HTTPClient http;
         FileSystem Fs;
+        String mensaje;
         
         String ApiHost = "http://192.168.1.8:3000";
         //String ApiHost = "http://raspberrypi.local:3000";
@@ -22,7 +23,7 @@ class Api  {
           
     public:
         void Create(int valor, String hora, long unixTime);
-        //void Reenvio(String message, String dayStamp);
+        void Reenvio(String hora);
         
                    
 };

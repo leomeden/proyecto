@@ -12,7 +12,7 @@ Conexion con;
 Hora tiempo;
 Api api;
 FileSystem Fs;
-String hora;
+String hr;
 long unixTime;
 volatile boolean bandera = false;
 int randNumber1, randNumber2;
@@ -38,16 +38,16 @@ void loop() {
   
   if (bandera) {
     tiempo.Actualizar_Hora();
-    hora = tiempo.Traer_Hora();
+    hr = tiempo.Traer_Hora();
     randNumber1 = random(218, 223); //aca poner la funcion de lectura de tension
     randNumber2 = random(3, 8); //aca poner la funcion de lectura de corriente
     bandera = false;
     unixTime = tiempo.Traer_Hora_Unix();
 
-    api.Create(randNumber1, hora , unixTime);
+    api.Create(randNumber1, hr , unixTime);
 
     Serial.print("Hora: ");
-    Serial.print(hora);
+    Serial.print(hr);
     Serial.print(" / ");
     Serial.print("V: ");
     Serial.print(randNumber1);
@@ -55,6 +55,8 @@ void loop() {
     Serial.print("I: ");
     Serial.println(randNumber2);
     Serial.println("");
+
+    api.Reenvio(hr);
   }
 
 }

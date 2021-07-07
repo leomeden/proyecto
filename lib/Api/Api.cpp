@@ -56,25 +56,31 @@ void Api::Create(int valor, String hora, long unixTime)
 
 }
 
-/*void Api::Reenvio(String message, String dayStamp)
+void Api::Reenvio(String hora)
 {
+  mensaje = Fs.Enviar_FS();
+
+  if (mensaje != "") {
+  int splitT = hora.indexOf("T");
+  String dayStamp = hora.substring(0, splitT);
   //HTTPClient http;
   http.setTimeout(500);
-  http.begin(ApiHost + "/api/sensor");
+  http.begin(client, ApiHost + "/api/sensor");
   http.addHeader("Content-Type", "application/json");
 
   //Verifica largo del mensaje
-  int contentLength = message.length();
+  int contentLength = mensaje.length();
   Serial.printf("largo del mensaje: %d\n", contentLength);
   String largo = String(contentLength);
   http.addHeader("Content-Length", largo);
   
-  int httpCode = http.POST(message);
+  int httpCode = http.POST(mensaje);
 
-  processResponse(httpCode, http, message, dayStamp);
+
+  processResponse(httpCode, http, mensaje, dayStamp);
  
   //int splitT = hora.indexOf("T");
   //String dayStamp = hora.substring(0, splitT);
   //processResponse(httpCode, http, message, dayStamp);
-  
-}*/
+  }
+}

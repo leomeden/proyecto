@@ -2,21 +2,37 @@
 #define __FILESYSTEM_H__
 
 #include <Arduino.h>
-#include "FS.h" 
+//class Api;
 //#include "Api.h"
+#include "LittleFS.h" 
+
 
 class FileSystem {
 
     private: 
-
-        //Api _api;
+        bool result;
+        File f;
+        Dir dir;
+        String lastFileName;
+        String nomArchivo;
+        int contadorLineas;
+        int contadorArchivos;
+        String carpetaFecha;
+        String line;
+        String lastDir;
+        String message ="";
+        String arrayDatos[10];
+        int i;
+        int j;
+        String suma;
+        //Api* _api;
 
     public:
 
         void Format_FS();
         void Abrir_FS();
         void Guardar_FS(String message, String dayStamp);
-        void Enviar_FS();
+        String Enviar_FS();
 
 };
 
