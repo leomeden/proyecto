@@ -22,7 +22,7 @@ void FileSystem::Abrir_FS()
 
 void FileSystem::Guardar_FS(String message, String dayStamp)
 {
-      carpetaFecha = "/"+dayStamp;
+      carpetaFecha = "/log/"+dayStamp;
       
       dir = LittleFS.openDir(carpetaFecha);
 
@@ -107,43 +107,42 @@ String FileSystem::Enviar_FS()
       Serial.println("#######################");
       Serial.println("Rutina de reenvio");
       
-      dir = LittleFS.openDir("/");
+      dir = LittleFS.openDir("/log/");
       
         if (!dir.next()){
             Serial.println("No Hay Nada Acumulado Para Mandar!!!!!");   
         } else {
-              //contadorArchivos = 1;
               lastDir = dir.fileName();
               Serial.print("Nombre de Carpetas DIAS: "); 
-              Serial.println(lastDir);
+              Serial.println("/log/"+lastDir);
               Serial.println("");        
         }
 
         while (dir.next()){
             lastDir = dir.fileName();
             Serial.print("Nombre de Carpetas DIAS: "); 
-            Serial.println(lastDir);
+            Serial.println("/log/"+lastDir);
             Serial.println("");        
         }
-        dir = LittleFS.openDir("/"+lastDir+"/");
+        dir = LittleFS.openDir("/log/"+lastDir+"/");
               
               contadorArchivos = 0;
               while(dir.next()){ 
                   ++contadorArchivos;
                   lastFileName = dir.fileName();  
                   Serial.print("Nombre de Archivo: "); 
-                  Serial.println(lastDir+"/"+lastFileName);
+                  Serial.println("/log/"+lastDir+"/"+lastFileName);
                   Serial.println("");
                   }
               
               Serial.print("Ultimo archivo creado: "); 
-              Serial.println(lastDir+"/"+lastFileName);
+              Serial.println("/log/"+lastDir+"/"+lastFileName);
               Serial.print("Cantidad de Archivos: ");
               Serial.println(contadorArchivos);
                   
                   //Creo el array para enviarlo
                   contadorLineas = 0;
-                  f = LittleFS.open(lastDir+"/"+lastFileName, "r");
+                  f = LittleFS.open("/log/"+lastDir+"/"+lastFileName, "r");
                   while(f.available()) {
                       // Permite leer línea por línea desde el archivo
                     line = f.readStringUntil('\n');
@@ -151,29 +150,29 @@ String FileSystem::Enviar_FS()
                     ++contadorLineas;
                   }
                   f.close();
-                  Serial.println("Array: ");
+                  /*Serial.println("Array: ");
                   for (i=0; i<contadorLineas; i++) {
                     
                       Serial.println(arrayDatos[i]);
-                  }  
+                  }  */
 
                   if (contadorLineas<1) {
 
-                        LittleFS.remove(lastDir+"/"+lastFileName);
+                        LittleFS.remove("/log/"+lastDir+"/"+lastFileName);
                         message ="";
 
                   } else {
                             
                             message=arrayDatos[(contadorLineas-1)];
                             
-                            Serial.println("ultimo dato: ");
-                            Serial.println(message);
-                            Serial.println("array con el ultimo dato afuera: ");
-                            f = LittleFS.open(lastDir+"/"+lastFileName, "w");
+                            //Serial.println("ultimo dato: ");
+                            //Serial.println(message);
+                            //Serial.println("array con el ultimo dato afuera: ");
+                            f = LittleFS.open("/log/"+lastDir+"/"+lastFileName, "w");
                             for (j=0; j<(contadorLineas-1); j++) {
                                      
                               f.println(arrayDatos[j]);
-                              Serial.println(arrayDatos[j]);
+                              //Serial.println(arrayDatos[j]);
                               
                             }
                             f.close();
@@ -182,7 +181,9 @@ String FileSystem::Enviar_FS()
                             Serial.println(message);
                                                                                                          
                       }
-
+                      Serial.println("Fin Rutina de reenvio");
+                      Serial.println("#######################");
+      
                       return message;
                     
                   }
