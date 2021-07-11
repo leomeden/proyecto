@@ -38,23 +38,10 @@ void FileSystem::Guardar_FS(String message, String dayStamp)
             f = LittleFS.open(nomArchivo, "w");
             f.println(message);
             f.close();   
-            //prueba de imprimir al crear primer archivo
-            //Serial.println("###################");
-            //Serial.println("Prueba al crear");
-            //f = LittleFS.open(nomArchivo, "r");
-            //  while(f.available()) {
-            //    String line = f.readStringUntil('\n');
-            //    Serial.println(line);
-            //  }
-            //  f.close();
-            //Serial.println("Fin Prueba al crear");
-            //Serial.println("###################");
-
+            
         } else {
               contadorArchivos = 1;
               lastFileName = dir.fileName();
-              //Serial.println("###################");
-              //Serial.println("Prueba 2!!!!!!");
               Serial.print("Archivo: ");
               Serial.println(carpetaFecha+"/"+lastFileName);
             
@@ -68,26 +55,20 @@ void FileSystem::Guardar_FS(String message, String dayStamp)
               f = LittleFS.open(carpetaFecha+"/"+lastFileName, "r");
               contadorLineas=1;
               line = f.readStringUntil('\n');
-              //Serial.println(line);
-         
+                       
               while(f.available()) {
                 // Permite leer línea por línea desde el archivo
                 ++contadorLineas;
                 line = f.readStringUntil('\n');
-                //Serial.println(line);
               }
               f.close();
-              //Serial.print("Cantidad de líneas: ");
-              //Serial.println(contadorLineas);
               if (contadorLineas <10){
                   Serial.print("Cantidad de archivos: ");
                   Serial.println(contadorArchivos);
                   f = LittleFS.open(carpetaFecha+"/"+lastFileName, "a");
                   f.println(message);
                   f.close();
-                  //Serial.println("Ultimo agregado: ");
-                  //Serial.println(message);
-                  
+                                    
                   f = LittleFS.open(carpetaFecha+"/"+lastFileName, "r");
                   Serial.println("Contenido del archivo con el agregado: ");
                   while(f.available()) {
@@ -112,8 +93,7 @@ void FileSystem::Guardar_FS(String message, String dayStamp)
                       Serial.println(line);
                   }
                   f.close();
-                  //Serial.println("Ultimo agregado: ");
-                  //Serial.println(message);
+                 
               }
         }
         
@@ -127,13 +107,8 @@ String FileSystem::Enviar_FS()
       Serial.println("#######################");
       Serial.println("Rutina de reenvio");
       
-      //carpetaFecha = "/"+dayStamp;
-      
-      //Dir dir = SPIFFS.openDir(carpetaFecha);
       dir = LittleFS.openDir("/");
       
-        //Serial.println("Carpetas creadas: ");  
-
         if (!dir.next()){
             Serial.println("No Hay Nada Acumulado Para Mandar!!!!!");   
         } else {
@@ -205,14 +180,7 @@ String FileSystem::Enviar_FS()
 
                             Serial.print("Dato a Enviar: ");
                             Serial.println(message);
-
-                            
-
-                            //int splitT = lastFileName.indexOf("/", 2);
-                            //String dayStamp = lastFileName.substring(1, splitT);
-
-                            //_api.Reenvio(message, dayStamp);
-                                                     
+                                                                                                         
                       }
 
                       return message;

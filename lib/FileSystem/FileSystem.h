@@ -2,8 +2,6 @@
 #define __FILESYSTEM_H__
 
 #include <Arduino.h>
-//class Api;
-//#include "Api.h"
 #include "LittleFS.h" 
 
 
@@ -25,8 +23,7 @@ class FileSystem {
         int i;
         int j;
         String suma;
-        //Api* _api;
-
+        
     public:
 
         void Format_FS();

@@ -23,9 +23,7 @@ void Api::processResponse(int httpCode, HTTPClient& http, String message, String
 void Api::Create(int valor, String hora, long unixTime)
 {
   Serial.println("Entre al create");
-  //WiFiClient client;
-  //HTTPClient http;
-
+ 
   http.setTimeout(500);
   http.begin(client, ApiHost + "/api/sensor");
   http.addHeader("Content-Type", "application/json");
@@ -44,7 +42,6 @@ void Api::Create(int valor, String hora, long unixTime)
 
   //Verifica largo del mensaje
   int contentLength = message.length();
-  //Serial.printf("largo del mensaje: %d\n", contentLength);
   String largo = String(contentLength);
   http.addHeader("Content-Length", largo);
   
@@ -76,11 +73,7 @@ void Api::Reenvio(String hora)
   
   int httpCode = http.POST(mensaje);
 
-
   processResponse(httpCode, http, mensaje, dayStamp);
  
-  //int splitT = hora.indexOf("T");
-  //String dayStamp = hora.substring(0, splitT);
-  //processResponse(httpCode, http, message, dayStamp);
   }
 }
