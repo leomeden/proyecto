@@ -23,7 +23,8 @@ void funcInterr() {
 
 void setup() {
   Serial.begin(115200);
-  con.ConnectWiFi_STA(); //conecta wifi en modo Station
+  //con.ConnectWiFi_STA(); //conecta wifi en modo Station
+  con.ConManager(); //crea AP para conectar sin credenciales
   tiempo.Iniciar_Hora();
   tiempo.Actualizar_Hora();
   //Comentar esta línea despues de la primera vez ya que formatea el SPIFFS
